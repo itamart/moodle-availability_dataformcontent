@@ -24,7 +24,7 @@
 
 $string['pluginname'] = 'Restriction by dataform content';
 $string['description'] = 'Require students to have (or not have) entries with reference to this activity in the specified dataform.';
-$string['error_selectcdataform'] = 'You must select a dataform for the condition.';
+$string['error_selectdataform'] = 'You must select a dataform for the condition.';
 $string['missing'] = '(Missing activity)';
 $string['requires_dataformcontent'] = 'this activity is listed in <strong>{$a}</strong>';
 $string['requires_notdataformcontent'] = 'this activity is not listed in <strong>{$a}</strong>';
