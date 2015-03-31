@@ -32,7 +32,7 @@ M.availability_dataformcontent.form.initInner = function(dataforms) {
 M.availability_dataformcontent.form.getNode = function(json) {
     // Create HTML structure.
     var html = '<label>' + M.util.get_string('title', 'availability_dataformcontent') +
-            ' <span class="availability-group">' +
+            ' <span class="availability-dataformcontent">' +
             '<select name="id">' +
             '<option value="choose">' + M.util.get_string('choosedots', 'moodle') + '</option>';
     for (var i = 0; i < this.dataforms.length; i++) {

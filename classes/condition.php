@@ -56,27 +56,41 @@ class condition extends \core_availability\condition {
     public static function get_dataforms($courseid) {
         global $DB, $CFG;
 
-        $dataforms = array();
+        // Get the course dataforms.
+        $dataforms = $DB->get_records_menu('dataform', array('course' => $courseid), 'name', 'id,name');
+        if (!$dataforms) {
+            return array();
+        }
 
         // Get the designated field name.
         $fieldname = self::get_reserved_field_name();
 
-        // Get all the dataforms which has a designated field.
-        $dataids = $DB->get_records_menu('dataform_fields', array('name' => $fieldname), 'dataid', 'id,dataid');
+        // Get all the dataforms which have a designated field.
+        list($inids, $params) = $DB->get_in_or_equal(array_keys($dataforms));
+        $select = " dataid $inids AND name = ? ";
+        $params[] = $fieldname;
+        $dataids = $DB->get_records_select_menu(
+            'dataform_fields',
+            $select,
+            $params,
+            'dataid',
+            'id,dataid'
+        );
         if (!$dataids) {
-            return $dataforms;
+            return array();
         }
         $dataids = array_unique($dataids);
 
-        // Now get the dataforms.
-        $records = $DB->get_records_list('dataform', 'id', $dataids, 'name', 'id,name');
-        if ($records) {
-            foreach ($records as $dataformid => $dataform) {
-                $dataforms[$dataformid] = $dataform->name;
+        // Now adjust the dataforms list.
+        $menu = array();
+        foreach ($dataids as $dataid) {
+            if (array_key_exists($dataid, $dataforms)) {
+                $menu[$dataid] = $dataforms[$dataid];
             }
         }
+        asort($menu);
 
-        return $dataforms;
+        return $menu;
     }
 
     /**
@@ -160,15 +174,28 @@ class condition extends \core_availability\condition {
      *
      */
     public function is_available($not, \core_availability\info $info, $grabthelot, $userid) {
+        if (!$this->dataformid) {
+            return false;
+        }
+
         // Get the dataform.
-        $df = \mod_dataform_dataform::instance($this->dataformid);
+        try {
+            $df = new \mod_dataform_dataform($this->dataformid);
+
+        } catch (Exception $e) {
+            $this->dataformid = null;
+            return false;
+        }
 
         // Get the filter.
         $filter = $this->get_reserved_filter();
 
         // The activity search criterion.
         $fieldname = self::get_reserved_field_name();
-        $field = $df->field_manager->get_field_by_name($fieldname);
+        if (!$field = $df->field_manager->get_field_by_name($fieldname)) {
+            return false;
+        }
+
         $cmref = $this->get_activity_reference($info);
 
         $searchactivity = array(
@@ -226,8 +253,7 @@ class condition extends \core_availability\condition {
     }
 
     /**
-     * Include this condition only if we are including activities in restore, or
-     * if it's a generic 'same activity' one.
+     * Include this condition only if dataformid is not empty.
      *
      * @param int $restoreid The restore Id.
      * @param int $courseid The ID of the course.
@@ -235,11 +261,11 @@ class condition extends \core_availability\condition {
      * @param string $name Name of item being restored.
      * @param base_task $task The task being performed.
      *
-     * @return Integer dataformid
+     * @return bool
      */
     public function include_after_restore($restoreid, $courseid, \base_logger $logger,
             $name, \base_task $task) {
-        return !$this->dataformid || $task->get_setting_value('activities');
+        return !empty($this->dataformid);
     }
 
     /**
@@ -251,6 +277,7 @@ class condition extends \core_availability\condition {
         if (!$this->dataformid) {
             return false;
         }
+
         $rec = \restore_dbops::get_backup_ids_record($restoreid, 'dataform', $this->dataformid);
         if (!$rec || !$rec->newitemid) {
             // If we are on the same course (e.g. duplicate) then we can just
@@ -260,12 +287,12 @@ class condition extends \core_availability\condition {
                 return false;
             }
             // Otherwise it's a warning.
-            $this->dataformid = -1;
+            $this->dataformid = null;
             $logger->process('Restored item (' . $name .
                     ') has availability condition on dataformcontent that was not restored',
                     \backup::LOG_WARNING);
         } else {
-            $this->dataformid = (int)$rec->newitemid;
+            $this->dataformid = (int) $rec->newitemid;
         }
         return true;
     }

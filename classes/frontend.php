@@ -50,7 +50,7 @@ class frontend extends \core_availability\frontend {
      * Use cached result if available. The cache is just because we call it
      * twice (once from allow_add) so it's nice to avoid doing all the
      * print_string calls twice.
-     * 
+     *
      * @return array
      */
     protected function get_javascript_init_params($course, \cm_info $cm = null,
@@ -71,12 +71,15 @@ class frontend extends \core_availability\frontend {
         global $DB;
 
         if ($courseid != $this->dataformscourseid) {
+            $this->dataforms = array();
+
             // Get applicable dataforms.
-            $dataforms = condition::get_dataforms($courseid);
+            if (!$dataforms = condition::get_dataforms($courseid)) {
+                return array();
+            }
 
             // Now get their select fields.
             $context = \context_course::instance($courseid);
-            $this->dataforms = array();
             foreach ($dataforms as $dataformid => $name) {
                 $name = format_string($name, true, array('context' => $context));
                 $this->dataforms[] = (object) array(
@@ -84,6 +87,7 @@ class frontend extends \core_availability\frontend {
                     'name' => $name
                 );
             }
+            $this->dataformcourseid = $courseid;
         }
         return $this->dataforms;
     }
