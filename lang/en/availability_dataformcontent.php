@@ -34,15 +34,8 @@ $string['reservedfiltername'] = 'Availability';
 $string['id'] = 'Id';
 $string['cmid'] = 'CM id';
 $string['configactivityref'] = 'Activity reference by';
-$string['configactivityref_desc'] = 'This setting determines the activity property that is used for referencing '.
-'from the Dataform content. By default the activity name is used as it is easy to reference from statnard '.
-'Dataform fields such as select and text. You may need to use id or cmid if for instance you may have multiple '.
-'multiple activities with the same name that need to be referenced from the same target Dataform.';
+$string['configactivityref_desc'] = 'This setting determines the activity property that is used for referencing from the Dataform content. By default the activity name is used as it is easy to reference from statnard Dataform fields such as select and text. You may need to use id or cmid if for instance you may have multiple multiple activities with the same name that need to be referenced from the same target Dataform.';
 $string['configreservedfield'] = 'Reserved field name';
-$string['configreservedfield_desc'] = 'This settings specifies a reserved name for a Dataform field in the '.
-'target Dataform that will be used for storing a reference to the restricted activity. The designated field '.
-'should be able to store the activity reference item (the activity name, id or cmid) as its content.';
+$string['configreservedfield_desc'] = 'This settings specifies a reserved name for a Dataform field in the target Dataform that will be used for storing a reference to the restricted activity. The designated field should be able to store the activity reference item (the activity name, id or cmid) as its content.';
 $string['configreservedfilter'] = 'Reserved filter name';
-$string['configreservedfilter_desc'] = 'This settings specifies a reserved name for a Dataform filter in the '.
-'target Dataform that will be applied by the condition if exists. Such a filter can be used for adding further '.
-'restrictions based on the Dataform content (e.g. start and end time).';
+$string['configreservedfilter_desc'] = 'This settings specifies a reserved name for a Dataform filter in the target Dataform that will be applied by the condition if exists. Such a filter can be used for adding further restrictions based on the Dataform content (e.g. start and end time).';
