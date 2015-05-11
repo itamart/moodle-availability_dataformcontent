@@ -55,6 +55,7 @@ Feature: Condition stands activity duplication
 
         #Section: Admin duplicates the restricted activity.
         Then I log in as "admin"
+        And I follow "Courses"
         And I follow "Course 1"
         And I should not see "Not available unless: this activity is listed in" in the "Topic 3" "section"
 
