@@ -1,4 +1,4 @@
-@availability @availability_dataformcontent
+@availability @availability_dataformcontent @mod_dataform
 Feature: availability_dataformcontent
     In order to control student access to activities from a Dataform dashboard
     As a teacher
@@ -18,7 +18,7 @@ Feature: availability_dataformcontent
         #Section: Set up.
         And the following "activities" exist:
             | activity | course | idnumber  | name            | individualized |
-            | dataform | C1     | dataform1 | Dashboard       | 1              |
+            | dataform | C1     | dataform1 | MasterList       | 1              |
 
         And the following dataform "fields" exist:
             | name                  | type          | dataform  | param1        |
@@ -64,7 +64,7 @@ Feature: availability_dataformcontent
         And I click on "Add restriction..." "button"
         And I click on "Dataform content" "button" in the "Add restriction..." "dialogue"
         And I click on ".availability-item .availability-eye img" "css_element"
-        And I set the field "Dataform content" to "Dashboard"
+        And I set the field "Dataform content" to "MasterList"
         And I press "Save and return to course"
         And I log out
         #:Section
@@ -86,7 +86,7 @@ Feature: availability_dataformcontent
         #Section: Teacher grants access to Student 1.
         Then I log in as "teacher1"
         And I follow "Course 1"
-        And I follow "Dashboard"
+        And I follow "MasterList"
         And I follow "Manage List"
         And I follow "Add a new entry"
         And I set the field "entry_-1_userid" to "Student 1"
@@ -112,7 +112,7 @@ Feature: availability_dataformcontent
         #Section: Teacher adds a filter on from to time.
         Then I log in as "teacher1"
         And I follow "Course 1"
-        And I follow "Dashboard"
+        And I follow "MasterList"
         And I go to manage dataform "filters"
         And I follow "Add a filter"
         And I set the field "Name" to "Availability"
@@ -139,7 +139,7 @@ Feature: availability_dataformcontent
         #Section: Teacher grants access to Student 2.
         Then I log in as "teacher1"
         And I follow "Course 1"
-        And I follow "Dashboard"
+        And I follow "MasterList"
         And I follow "Manage List"
         And I follow "Add a new entry"
         And I set the field "entry_-1_userid" to "Student 2"
@@ -222,7 +222,7 @@ Feature: availability_dataformcontent
         #Section: Teacher grants access to Original for Student 1.
         Then I log in as "teacher1"
         And I follow "Course 1"
-        And I follow "Dashboard"
+        And I follow "MasterList"
         And I follow "Manage List"
         And I follow "Add a new entry"
         And I set the field "entry_-1_userid" to "Student 1"
@@ -245,6 +245,7 @@ Feature: availability_dataformcontent
 
         #Section: Admin copies Course 1 to Course 2.
         And I log in as "admin"
+        And I follow "Courses"
         And I follow "Course 1"
         And I backup "Course 1" course using this options:
           | Confirmation | Filename | test_backup.mbz |
@@ -264,7 +265,7 @@ Feature: availability_dataformcontent
         #Section: Teacher in Course 2 grants access to Extra Page for Student 1.
         Then I log in as "teacher1"
         And I follow "Course 2"
-        And I follow "Dashboard"
+        And I follow "MasterList"
         And I follow "Manage List"
         And I follow "Add a new entry"
         And I set the field "entry_-1_userid" to "Student 1"
