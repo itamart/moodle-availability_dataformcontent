@@ -1,4 +1,4 @@
-@availability @availability_dataformcontent @availability_dataformcontent_duplication
+@availability @availability_dataformcontent @availability_dataformcontent_duplication @mod_dataform
 Feature: Condition stands activity duplication
     In order to control student access to activities from a Dataform dashboard
     As a teacher

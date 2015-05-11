@@ -1,4 +1,4 @@
-@availability @availability_dataformcontent
+@availability @availability_dataformcontent @mod_dataform
 Feature: availability_dataformcontent
     In order to control student access to activities from a Dataform dashboard
     As a teacher
