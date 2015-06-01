@@ -6,7 +6,7 @@ This availability condition allows teachers to restrict user access to course se
 
 Release:
 --------
-2.8.1
+2.8.6
 
 Documentation:
 --------------
