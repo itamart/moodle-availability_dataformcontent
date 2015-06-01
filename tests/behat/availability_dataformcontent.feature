@@ -22,7 +22,7 @@ Feature: availability_dataformcontent
 
         And the following dataform "fields" exist:
             | name                  | type          | dataform  | param1        |
-            | Conditional Activity  | select        | dataform1 | Extra Page\\nExtra Original Page    |
+            | Conditional Activity  | select        | dataform1 | {Extra Page,Extra Original Page}    |
             | From                  | time          | dataform1 |               |
             | To                    | time          | dataform1 |               |
 
