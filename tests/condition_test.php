@@ -273,8 +273,8 @@ class availability_dataformcontent_condition_testcase extends advanced_testcase 
         // Add designated filter.
         $this->setAdminUser();
         $searchoptions = array(
-            "AND,$fromfield->id,content,,<=,now",
-            "AND,$tofield->id,content,,>=,now",
+            "AND,$fromfield->name,content,,<=,now",
+            "AND,$tofield->name,content,,>=,now",
         );
         $filter = array(
             'name' => \availability_dataformcontent\condition::get_reserved_filter_name(),
