@@ -25,8 +25,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'availability_dataformcontent';
-$plugin->release  = '2.8';
-$plugin->version = 2014111000;
-$plugin->requires = 2014111000;
+$plugin->release  = '2.9';
+$plugin->version = 2015051100;
+$plugin->requires = 2015051100;
 $plugin->maturity = MATURITY_STABLE;
-$plugin->dependencies = array('mod_dataform' => 2014111000);
+$plugin->dependencies = array('mod_dataform' => 2015051100);
