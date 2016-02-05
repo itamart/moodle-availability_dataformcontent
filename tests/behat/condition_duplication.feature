@@ -6,11 +6,8 @@ Feature: Condition stands activity duplication
 
     Background:
     Given a fresh site for dataform scenario
-
-    And I log in as "admin"
-    And I set the following administration settings values:
-        | Enable conditional access  | 1 |
-    And I log out
+    And the following config values are set as admin:
+        | enableavailability | 1 |
     
     #Section: Duplicate a restricted dataform activity via dataform preset.
     @javascript
