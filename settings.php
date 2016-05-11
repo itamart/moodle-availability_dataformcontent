@@ -23,8 +23,6 @@
 defined('MOODLE_INTERNAL') or die;
 
 if ($hassiteconfig && !empty($CFG->enableavailability)) {
-    $pluginname = get_string('title', 'availability_dataformcontent');
-    $settings = new admin_settingpage('availabilitysettingdataformcontent', $pluginname, 'moodle/site:config');
 
     // Activity reference item.
     $options = array(
@@ -58,5 +56,4 @@ if ($hassiteconfig && !empty($CFG->enableavailability)) {
             PARAM_TEXT
     ));
 
-    $ADMIN->add('availabilitysettings', $settings);
 }
