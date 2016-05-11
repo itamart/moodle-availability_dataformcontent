@@ -18,15 +18,15 @@
  * Version info.
  *
  * @package availability_dataformcontent
- * @copyright 2015 Itamar Tzadok
+ * @copyright 2016 Itamar Tzadok
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'availability_dataformcontent';
-$plugin->release  = '2.9';
-$plugin->version = 2015051100;
-$plugin->requires = 2015051100;
+$plugin->release  = '3.0.4';
+$plugin->version = 2015111604;
+$plugin->requires = 2015111600;
 $plugin->maturity = MATURITY_STABLE;
-$plugin->dependencies = array('mod_dataform' => 2015051100);
+$plugin->dependencies = array('mod_dataform' => 2015111604);
