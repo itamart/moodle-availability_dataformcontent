@@ -1,4 +1,4 @@
-@availability @availability_dataformcontent @mod_dataform
+@availability @availability_dataformcontent @set_dataform
 Feature: availability_dataformcontent
     In order to control student access to activities from a Dataform dashboard
     As a teacher
@@ -49,7 +49,8 @@ Feature: availability_dataformcontent
 
         #Section: Add a conditional Page.
         And I log in as "teacher1"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
+
         And I turn editing mode on
 
         And I add a "Page" to section "2"
@@ -68,23 +69,26 @@ Feature: availability_dataformcontent
 
         #Section: Student 1 cannot yet see the extra page.
         When I log in as "student1"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
+
         Then I should not see "Extra Page" in the "region-main" "region"
         And I log out
         #:Section
 
         #Section: Student 2 cannot yet see the extra page.
         When I log in as "student2"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
+
         Then I should not see "Extra Page" in the "region-main" "region"
         And I log out
         #:Section
 
         #Section: Teacher grants access to Student 1.
         Then I log in as "teacher1"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
+
         And I follow "MasterList"
-        And I follow "Manage List"
+        And I am on view "Manage List" in dataform "dataform1"
         And I follow "Add a new entry"
         And I set the field "entry_-1_userid" to "Student 1"
         And I set the field "field_1_-1_selected" to "Extra Page"
@@ -94,21 +98,24 @@ Feature: availability_dataformcontent
 
         #Section: Student 1 can now see the extra page.
         When I log in as "student1"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
+
         Then I should see "Extra Page" in the "region-main" "region"
         And I log out
         #:Section
 
         #Section: Student 2 cannot yet see the extra page.
         When I log in as "student2"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
+
         Then I should not see "Extra Page" in the "region-main" "region"
         And I log out
         #:Section
 
         #Section: Teacher adds a filter on from to time.
         Then I log in as "teacher1"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
+
         And I follow "MasterList"
         And I go to manage dataform "filters"
         And I follow "Add a filter"
@@ -121,23 +128,26 @@ Feature: availability_dataformcontent
 
         #Section: Student 1 cannot see the extra page.
         When I log in as "student1"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
+
         Then I should not see "Extra Page" in the "region-main" "region"
         And I log out
         #:Section
 
         #Section: Student 2 cannot see the extra page.
         When I log in as "student2"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
+
         Then I should not see "Extra Page" in the "region-main" "region"
         And I log out
         #:Section
 
         #Section: Teacher grants access to Student 2.
         Then I log in as "teacher1"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
+
         And I follow "MasterList"
-        And I follow "Manage List"
+        And I am on view "Manage List" in dataform "dataform1"
         And I follow "Add a new entry"
         And I set the field "entry_-1_userid" to "Student 2"
         And I set the field "field_1_-1_selected" to "Extra Page"
@@ -151,21 +161,24 @@ Feature: availability_dataformcontent
 
         #Section: Student 1 cannot see the extra page.
         When I log in as "student1"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
+
         Then I should not see "Extra Page" in the "region-main" "region"
         And I log out
         #:Section
 
         #Section: Student 2 can now see the extra page.
         When I log in as "student2"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
+
         Then I should see "Extra Page" in the "region-main" "region"
         And I log out
         #:Section
 
         #Section: Teacher duplicates the extra page.
         Then I log in as "teacher1"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
+
         And I turn editing mode on
 
         And I duplicate "Extra Page" activity
@@ -175,21 +188,24 @@ Feature: availability_dataformcontent
 
         #Section: Student 1 cannot see either page.
         When I log in as "student1"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
+
         Then I should not see "Extra Page" in the "region-main" "region"
         And I log out
         #:Section
 
         #Section: Student 2 can see both pages.
         When I log in as "student2"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
+
         Then I should see "Extra Page" in the "region-main" "region"
         And I log out
         #:Section
 
         #Section: Teacher adjusts original page name.
         Then I log in as "teacher1"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
+
         And I turn editing mode on
 
         And I open "Extra Page" actions menu
@@ -202,7 +218,8 @@ Feature: availability_dataformcontent
 
         #Section: Student 1 cannot see both pages.
         When I log in as "student1"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
+
         Then I should not see "Extra Original Page" in the "region-main" "region"
         And I should not see "Extra Page" in the "region-main" "region"
         And I log out
@@ -210,7 +227,8 @@ Feature: availability_dataformcontent
 
         #Section: Student 2 can see only the new Extra Page.
         When I log in as "student2"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
+
         Then I should not see "Extra Original Page" in the "region-main" "region"
         And I should see "Extra Page" in the "region-main" "region"
         And I log out
@@ -218,9 +236,10 @@ Feature: availability_dataformcontent
 
         #Section: Teacher grants access to Original for Student 1.
         Then I log in as "teacher1"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
+
         And I follow "MasterList"
-        And I follow "Manage List"
+        And I am on view "Manage List" in dataform "dataform1"
         And I follow "Add a new entry"
         And I set the field "entry_-1_userid" to "Student 1"
         And I set the field "field_1_-1_selected" to "Extra Original Page"
@@ -234,7 +253,8 @@ Feature: availability_dataformcontent
 
         #Section: Student 1 can now see the original but not the new one.
         When I log in as "student1"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
+
         Then I should see "Extra Original Page" in the "region-main" "region"
         And I should not see "Extra Page" in the "region-main" "region"
         And I log out
@@ -242,8 +262,8 @@ Feature: availability_dataformcontent
 
         #Section: Admin copies Course 1 to Course 2.
         And I log in as "admin"
-        And I follow "Courses"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
+
         And I backup "Course 1" course using this options:
           | Confirmation | Filename | test_backup.mbz |
         And I restore "test_backup.mbz" backup into a new course using this options:
@@ -253,7 +273,7 @@ Feature: availability_dataformcontent
 
         #Section: Student 1 in Course 2 can see the original but not the new one.
         When I log in as "student1"
-        And I follow "Course 2"
+        And I am on "Course 2" course homepage
         Then I should see "Extra Original Page" in the "region-main" "region"
         And I should not see "Extra Page" in the "region-main" "region"
         And I log out
@@ -261,9 +281,9 @@ Feature: availability_dataformcontent
 
         #Section: Teacher in Course 2 grants access to Extra Page for Student 1.
         Then I log in as "teacher1"
-        And I follow "Course 2"
+        And I am on "Course 2" course homepage
         And I follow "MasterList"
-        And I follow "Manage List"
+        And I am on view "Manage List" in dataform "dataform1"
         And I follow "Add a new entry"
         And I set the field "entry_-1_userid" to "Student 1"
         And I set the field "field_4_-1_selected" to "Extra Page"
@@ -277,12 +297,12 @@ Feature: availability_dataformcontent
 
         #Section: Student 1 in Course 2 can see both pages but Course 1 only the original.
         When I log in as "student1"
-        And I follow "Course 2"
+        And I am on "Course 2" course homepage
         Then I should see "Extra Original Page" in the "region-main" "region"
         And I should see "Extra Page" in the "region-main" "region"
 
-        And I am on homepage
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
+
         Then I should see "Extra Original Page" in the "region-main" "region"
         And I should not see "Extra Page" in the "region-main" "region"
         And I log out

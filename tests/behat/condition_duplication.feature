@@ -1,4 +1,4 @@
-@availability @availability_dataformcontent @availability_dataformcontent_duplication @mod_dataform
+@availability @availability_dataformcontent @availability_dataformcontent_duplication @set_dataform
 Feature: Condition stands activity duplication
     In order to control student access to activities from a Dataform dashboard
     As a teacher
@@ -8,7 +8,7 @@ Feature: Condition stands activity duplication
     Given a fresh site for dataform scenario
     And the following config values are set as admin:
         | enableavailability | 1 |
-    
+
     #Section: Duplicate a restricted dataform activity via dataform preset.
     @javascript
     Scenario: Duplicate a restricted dataform activity via dataform preset.
@@ -36,49 +36,48 @@ Feature: Condition stands activity duplication
             | dataform | C1     | dataform3 | Restricted New Activity   | 3         |
 
         And I log in as "teacher1"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
         And I follow "Restricted Activity"
 
-        And I follow "Edit settings"        
+        And I navigate to "Edit settings" in current page administration
         And I expand all fieldsets
         And I click on "Add restriction..." "button"
         And I click on "Dataform content" "button" in the "Add restriction..." "dialogue"
         And I click on ".availability-item .availability-eye img" "css_element"
         And I set the field "Dataform content" to "Dashboard"
         And I press "Save and return to course"
-        
+
         And I log out
         #:Section
 
         #Section: Admin duplicates the restricted activity.
         Then I log in as "admin"
-        And I follow "Courses"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
         And I should not see "Not available unless: this activity is listed in" in the "Topic 3" "section"
 
-        And I follow "Restricted Activity"        
-        And I go to manage dataform "presets"
-        
+        And I follow "Restricted Activity"
+        And I navigate to "Presets" in current page administration
+
         # Add a preset without user data.
         And I expand all fieldsets
         And I press "id_add"
-        
+
         # Share the preset.
         #And I click on "img[title=Share]" "css_element" in the "-without-user-data" "table_row"
-        
-        # Apply in another Dataform.
-        And I follow "Course 1"
-        And I follow "Restricted New Activity"        
-        And I go to manage dataform "presets"
-        And I click on "img[title=Apply]" "css_element" in the "-without-user-data" "table_row"
 
-        And I follow "Course 1"
+        # Apply in another Dataform.
+        And I am on "Course 1" course homepage
+        And I follow "Restricted New Activity"
+        And I navigate to "Presets" in current page administration
+        And I click on "i[title=Apply]" "css_element" in the "-without-user-data" "table_row"
+
+        And I am on "Course 1" course homepage
         Then I should see "Not available unless: this activity is listed in Dashboard" in the "Topic 3" "section"
-        
+
         And I log out
         #:Section
     #:Section
-    
+
     #Section: Duplicate a restricted activity in the same course.
     @javascript
     Scenario: Duplicate a restricted activity in the same course
@@ -124,23 +123,23 @@ Feature: Condition stands activity duplication
             | dataform | C1     | dataform2 | Restricted Activity   | 2         |
 
         And I log in as "teacher1"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
         And I follow "Restricted Activity"
 
-        And I follow "Edit settings"        
+        And I navigate to "Edit settings" in current page administration
         And I expand all fieldsets
         And I click on "Add restriction..." "button"
         And I click on "Dataform content" "button" in the "Add restriction..." "dialogue"
         And I click on ".availability-item .availability-eye img" "css_element"
         And I set the field "Dataform content" to "Dashboard"
         And I press "Save and return to course"
-        
+
         And I log out
         #:Section
 
         #Section: Student 1 cannot yet see the restricted activity.
         When I log in as "student1"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
         Then I should not see "Restricted Activity" in the "region-main" "region"
         And I log out
         #:Section
@@ -154,37 +153,37 @@ Feature: Condition stands activity duplication
 
         #Section: Student 1 can now see the restricted activity.
         When I log in as "student1"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
         Then I should see "Restricted Activity" in the "Topic 2" "section"
         And I log out
         #:Section
 
         #Section: Student 2 cannot see the restricted activity.
         When I log in as "student2"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
         Then I should not see "Restricted Activity" in the "Topic 2" "section"
         And I log out
         #:Section
 
         #Section: Teacher duplicates the restricted activity.
         Then I log in as "teacher1"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
         And I turn editing mode on
 
         And I duplicate "Restricted Activity" activity
         And I wait until section "2" is available
 
         And I follow "Restricted Activity"
-        And I follow "Edit settings"
+        And I navigate to "Edit settings" in current page administration
         And I set the field "Name" to "Restricted Original Activity"
-        And I press "Save and return to course"        
-        
+        And I press "Save and return to course"
+
         And I log out
         #:Section
 
         #Section: Student 1 can see the restricted activity.
         When I log in as "student1"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
         Then I should see "Restricted Activity" in the "Topic 2" "section"
         And I should not see "Restricted Original Activity" in the "Topic 2" "section"
         And I log out
@@ -192,11 +191,11 @@ Feature: Condition stands activity duplication
 
         #Section: Student 2 cannot see the restricted activity.
         When I log in as "student2"
-        And I follow "Course 1"
+        And I am on "Course 1" course homepage
         Then I should not see "Restricted Activity" in the "Topic 2" "section"
         And I should see "Restricted Original Activity" in the "Topic 2" "section"
         And I log out
         #:Section
 
     #:Section
-    
+

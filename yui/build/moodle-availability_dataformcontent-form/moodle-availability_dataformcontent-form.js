@@ -54,7 +54,7 @@ M.availability_dataformcontent.form.getNode = function(json) {
     // Add event handlers (first time only).
     if (!M.availability_dataformcontent.form.addedEvents) {
         M.availability_dataformcontent.form.addedEvents = true;
-        var root = Y.one('#fitem_id_availabilityconditionsjson');
+        var root = Y.one('.availability-field');
         root.delegate('change', function() {
             // Just update the form fields.
             M.core_availability.form.update();

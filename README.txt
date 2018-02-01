@@ -6,8 +6,8 @@ This availability condition allows teachers to restrict user access to course se
 
 Release:
 --------
-3.0.4
+3.3.2
 
 Documentation:
 --------------
-http://docs.moodle.org/30/en/Availability_dataformcontent
+http://docs.moodle.org/33/en/Availability_dataformcontent
